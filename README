@@ -30,9 +30,6 @@ predict.scala
 - need model
 - output prediction at rent/prediction
 
-Execution: 
-(Sorry no application/package/jar file generated, using spark-shell only)
-
 Run the whole process using the following commands:
 //training
 spark-shell -i train_feature.scala
