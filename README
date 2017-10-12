@@ -1,0 +1,47 @@
+Data Source:
+https://www.kaggle.com/c/two-sigma-connect-rental-listing-inquiries/data
+
+Cleaned data used by the code locate at Dumbo HDFS:
+/user/yz3768/rent
+
+Code Description:
+
+train_feature.scala:
+- extract features from training data, see the comment in the code for more details
+- need input data at rent/train
+- save facility_list at rent/facility_list 
+- save some maps of features at rent/manager_code, rent/manager_score, rent/building_score
+- save KMeansModel at rent/KMeansModel for neighborhood clustering for test data 
+- output training data in "libsvm" format at rent/train_data
+
+test_feature.scala:
+- generate features from testing data
+- need input data at rent/test
+- need facility_list, manager_code, manager_score, building_score, KMeansModel
+- output testing data in "libsvm" format at rent/test_data
+
+classifier.scala:
+- train a classifier using random forest
+- need training data 
+- save trained model at rent/RFmodel
+
+predict.scala
+- need testing data
+- need model
+- output prediction at rent/prediction
+
+Execution: 
+(Sorry no application/package/jar file generated, using spark-shell only)
+
+Run the whole process using the following commands:
+//training
+spark-shell -i train_feature.scala
+spark-shell -i classifier.scala
+//testing
+spark-shell -i test_feature.scala
+spark-shell -i predict.scala
+
+or one command: 
+
+spark-shell -i train_feature.scala test_feature.scala classifier.scala predict.scala
+
